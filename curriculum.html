@@ -1,0 +1,2373 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bruno de Sousa, Full Stack Developer | Project Manager | Innovator</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            height: 100%;
+            width: 100%;
+            scroll-behavior: smooth;
+            font-family: "Segoe UI", sans-serif;
+            color: #fff;
+            background: #fff;
+        }
+
+        /* ===== Fixed Navbar ===== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 2rem;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+
+        .navbar h1 {
+            font-size: 1.2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            margin: 0 12px;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            text-decoration: underline;
+        }
+
+        .navbar input[type="text"] {
+            padding: 6px;
+            border-radius: 5px;
+            border: none;
+            outline: none;
+        }
+
+        .navbar button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: white;
+            margin-left: 8px;
+        }
+
+        /* search */
+        .search-box {
+            position: relative;
+        }
+
+        .search-box input {
+            padding: 6px 28px 6px 10px;
+            border-radius: 6px;
+            border: none;
+            font-size: 0.9rem;
+        }
+
+        .search-box button {
+            position: absolute;
+            right: 2px;
+            top: 2px;
+            bottom: 2px;
+            border: none;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            padding: 0 6px;
+        }
+
+        /* ed search */
+        .lang-select {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .lang-select img {
+            width: 28px;
+            height: 20px;
+            border: 1px #6c6c6c69;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .lang-select img:hover {
+            transform: scale(1.1);
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 100vh;
+            width: 100%;
+            background: url('cvimg/toptop.jpg') center/cover no-repeat;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.55);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Background video */
+        video#bgVideo {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            z-index: 0;
+            transition: opacity 1.2s ease-in-out;
+            pointer-events: none;
+        }
+
+        video#bgVideo.visible {
+            opacity: 1;
+        }
+
+        /* Shimmer Loader */
+        .shimmer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(120deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.1) 100%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite linear;
+            z-index: 3;
+        }
+
+        .hero h1,
+        .hero p,
+        .hero button {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .download-btn {
+            background: #3a9eba63;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .download-btn:hover {
+            background: #d35400;
+            transform: translateY(-2px);
+        }
+
+        /* ===== Sections ===== */
+
+        section {
+            min-height: 11vh;
+            padding: 80px 20px;
+            text-align: center;
+            background: #ffffff;
+            max-width: 1100px;
+            margin: auto;
+            padding: 2rem 1rem;
+        }
+
+        section:nth-of-type(even) {
+            background: #ffffff;
+        }
+
+        section h3 {
+            text-align: center;
+            padding-bottom: 0.4rem;
+            color: #2c3e50;
+        }
+
+        section h5 {
+            text-align: center;
+            padding-bottom: 0.4rem;
+            color: #2c3e50;
+        }
+
+        section h2 {
+            text-align: center;
+            padding-bottom: 1rem;
+            color: #2c3e50;
+        }
+
+        /* ===== Experience Cards ===== */
+        .experience-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: scale(1.03);
+        }
+
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 1rem;
+            background: white;
+        }
+
+        .card-content h3 {
+            color: #34495e;
+        }
+
+        .card-content h5 {
+            color: #34495e;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-content p {
+            color: #777;
+            font-size: 1.0rem;
+            text-align: left;
+        }
+
+
+        /* Hover lift & image zoom */
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.25);
+        }
+
+        .card:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Overlay hover effect */
+        .hover-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            opacity: 0;
+            pointer-events: none;
+            padding-bottom: 30px;
+            transition: opacity 0.3s ease;
+        }
+
+        .hover-overlay span {
+            color: #fff;
+            font-size: 1.3rem;
+            font-weight: bold;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover .hover-overlay {
+            opacity: 1;
+        }
+
+        .card:hover .hover-overlay span {
+            transform: translateY(0);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .card-content h3 {
+                font-size: 1.1rem;
+            }
+
+            .card-content h5 {
+                font-size: 1.0rem;
+            }
+
+            .card-content p {
+                font-size: 1.0rem;
+            }
+
+            .hover-overlay span {
+                font-size: 1.1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .card-content h3 {
+                font-size: 1.1rem;
+            }
+
+            .card-content h5 {
+                font-size: 1.0rem;
+            }
+
+            .card-content p {
+                font-size: 1.0rem;
+            }
+
+            .hover-overlay span {
+                font-size: 1rem;
+            }
+        }
+
+        @media (orientation: portrait) {
+            .hero {
+                height: 100vh;
+                background-position: top;
+            }
+
+            .experience-grid {
+                grid-template-columns: 1fr;
+                /* Stack cards vertically */
+            }
+        }
+
+        @media (orientation: landscape) {
+            .hero {
+                height: 100vh;
+                background-position: center;
+            }
+
+            .experience-grid {
+                grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+            }
+        }
+
+        /* ===== Modals 2  ===== */
+        .modal {
+            display: none;
+            /* or flex if using JS toggle */
+            position: fixed;
+            top: 1rem;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+        }
+
+        .modal-content {
+            background: #ffffff;
+            width: 90%;
+            max-width: 900px;
+            max-height: 90vh;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            color: #fff;
+            font-size: 1.8rem;
+            cursor: pointer;
+            z-index: 2;
+        }
+
+        .video-container {
+            position: sticky;
+            top: 0;
+            background: #000;
+            width: 100%;
+            flex-shrink: 0;
+        }
+
+        .video-container video {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .text-container {
+            overflow-y: auto;
+            padding: 20px;
+            flex: 1;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
+        }
+
+        .text-container h2,
+        .text-container h3 {
+            color: #000a16;
+        }
+
+        .text-container p {
+            line-height: 1.6;
+            color: #000a16;
+            text-align: left;
+        }
+
+        @media (max-width: 600px) {
+            .modal-content {
+                width: 95%;
+                max-height: 90vh;
+            }
+
+            .text-container {
+                padding: 15px;
+                font-size: 15px;
+            }
+        }
+
+        /* ===== Modals 2 end ===== */
+
+        /* ===== Modals 1 ===== */
+        .modal,
+        .contact-modal {
+            display: none;
+            /* position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+            z-index: 999; */
+        }
+
+        .modal-content,
+        .contact-box {
+            background: white;
+            padding: 1rem;
+            max-width: 800px;
+            width: 90%;
+            border-radius: 10px;
+            position: relative;
+        }
+
+        .modal-content video {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .close-btn,
+        .close-contact {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 2rem;
+            color: #333;
+            cursor: pointer;
+        }
+
+        /* ===== Contact Modal ===== */
+        .contact-box {
+            padding: 2rem;
+            max-width: 500px;
+        }
+
+        .contact-box input,
+        .contact-box textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+
+        .contact-box button {
+            width: 100%;
+            background: #2c3e50;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        /* ===== Modals 1 end ===== */
+
+        /* ===== Skills ===== */
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .skills-list span {
+            background: #2c3e50;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .navbar {
+                flex-direction: row;
+                gap: 8px;
+            }
+        }
+
+        @keyframes shimmer {
+            from {
+                background-position: -200% 0;
+            }
+
+            to {
+                background-position: 200% 0;
+            }
+        }
+
+        .fade-out {
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        /* Scroll Arrow */
+        .scroll-down {
+            position: absolute;
+            bottom: 30px;
+            font-size: 2rem;
+            color: #c7f3ff;
+            opacity: 0;
+            z-index: 3;
+            cursor: pointer;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .scroll-down.visible {
+            opacity: 1;
+            animation: bounce 2s infinite;
+        }
+
+        .scroll-text {
+            position: absolute;
+            opacity: 0;
+            bottom: 50px;
+            font-size: 2rem;
+            z-index: 3;
+            transition: opacity 1s ease-in-out;
+            color: #c7f3ff;
+        }
+
+        .scroll-text.visible {
+            opacity: 1;
+            /* animation: bounce 2s infinite; */
+        }
+
+        @keyframes bounce {
+
+            0%,
+            20%,
+            50%,
+            80%,
+            100% {
+                transform: translateY(0);
+            }
+
+            40% {
+                transform: translateY(6px);
+            }
+
+            60% {
+                transform: translateY(3px);
+            }
+        }
+
+        /* h2 {
+            font-size: 2em;
+            margin-bottom: 1em;
+        }
+
+        p {
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.1em;
+            line-height: 1.6em;
+        } */
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #000;
+            color: #888;
+        }
+    </style>
+</head>
+
+<body ontouchstart="">
+    <!-- Fixed Nav -->
+    <div class="navbar">
+        <!-- <h1 id="navName">[Your Name]</h1> -->
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Search text...">
+            <button onclick="searchText()">🔍</button>
+        </div>
+        <!-- <div class="nav-links">
+            <a href="#experience" id="navExp">Experience</a>
+            <a href="#skills" id="navSkills">Skills</a>
+            <a href="#" onclick="openContact()" id="navContact">Contact</a>
+        </div> -->
+        <div class="lang-select">
+            <img src="https://flagcdn.com/gb.svg" alt="English" onclick="setLanguage('en')">
+            <img src="https://flagcdn.com/pt.svg" alt="Portuguese" onclick="setLanguage('pt')">
+        </div>
+    </div>
+    <!-- Hero -->
+    <section class="hero" id="hero">
+        <div class="shimmer" id="loader"></div>
+
+        <video id="bgVideo" preload="auto" muted loop playsinline>
+            <source src="cvimg/floating_inn_space.mp4" type="video/mp4">
+            Your browser does not support HTML5 video.
+        </video>
+
+        <div class="hero-content">
+            <br />
+            <br />
+            <br />
+            <h1>Bruno de Sousa</h1>
+            <p>Full Stack Developer | Project Manager | Innovator</p>
+        </div>
+        <div class="scroll-text" id="scrollText">
+            <button class="download-btn" onclick="downloadResume()">📄 Download Resume (PDF)</button>
+            <p></p>
+            <p>Explore my experience and background</p>
+        </div>
+        <div class="scroll-down" id="scrollDown">▼</div>
+    </section>
+    <!-- Experience Section -->
+    <section id="experience">
+        <h2>Professional Experience</h2>
+        <div class="experience-grid">
+            <div class="card" onclick="openModal('video1')">
+                <img src="cvimg/gmaps_400x250.jpg" alt="Experience 1">
+                <div class="card-content">
+                    <h3>Independent I.T. Developer</h3>
+                    <h5>May 2025-present</h5>
+                    <p>
+                        Mobile App Developer (<b>Flutter</b> / <b>Dart</b>)
+                        Designing and developing cross-platform mobile applications using <b>Flutter</b> and
+                        <b>Dart</b>, targeting both <b>iOS</b> and <b>Android</b>.
+                    </p>
+                </div>
+                <div class="hover-overlay"><span>Know more...</span></div>
+            </div>
+
+            <div class="card" onclick="openModal('video2')">
+                <img src="cvimg/wallbox_400x250.png" alt="Experience 2">
+                <div class="card-content">
+                    <h3>Software Engineer</h3>
+                    <h5> Critical TechWorks / BMW Group | 2022 - 2025 </h5>
+                    <p>Following the BDL Project, I helped design and implement the <b>SmartWallBox</b>, a
+                        production-grade electric vehicle charging platform to be integrated into the <b>BMW MyApp</b>
+                        ecosystem</p>
+                </div>
+                <div class="hover-overlay"><span>Know more...</span></div>
+            </div>
+
+            <div class="card" onclick="openModal('video3')">
+                <img src="cvimg/critical_002_400x250.png" alt="Experience 3">
+                <div class="card-content">
+                    <h3>Software Engineer</h3>
+                    <h5> Critical TechWorks / BMW Group | 2020 - 2022 </h5>
+                    <p>Contributed to the research and development of a bidirectional charging system using a fleet of
+                        20 BMW i3 vehicles equipped with <b>BMW BDL batteries</b>.</p>
+                </div>
+                <div class="hover-overlay"><span>Know more...</span></div>
+            </div>
+        </div>
+        </br>
+
+        <div class="experience-grid">
+            <div class="card" onclick="openModal('video4')">
+                <img src="cvimg/critical_003_400x250.jpg" alt="Experience 4">
+                <div class="card-content">
+                    <h3>Software Engineer</h3>
+                    <h5> Critical TechWorks / BMW Group | 2019 - 2020 </h5>
+                    <p>Joined <b>Critical TechWorks</b>, a joint venture between <b>BMW Group</b> and <b>Critical
+                            Software</b>, as part of
+                        the <b>Electric Vehicle Charger (EVC)</b> project.</p>
+                </div>
+                <div class="hover-overlay"><span>Know more...</span></div>
+            </div>
+
+            <div class="card" onclick="openModal('video5')">
+                <img src="cvimg/modeler.gif" alt="Experience 5">
+                <div class="card-content">
+                    <h3>Independent R&D</h3>
+                    <h5> Advanced Application Modeling | 2015-2019 </h5>
+                    <p>Developed a full-stack platform-as-a-service and application modeling framework integrating
+                        <b>Node.js,
+                            AngularJs,React cand Node-RED</b>
+                    </p>
+                </div>
+                <div class="hover-overlay"><span>Know more...</span></div>
+            </div>
+            <div class="card" onclick="openModal('video6')">
+                <img src="cvimg/endouble_400x250.png" alt="Experience 6">
+                <div class="card-content">
+                    <h3>Software Engineer / Consultant</h3>
+                    <h5> Netwerven B.V. / Endouble (acquired by Phenon in 2020) | 2014 - 2015 </h5>
+                    <p>Served as both architect and developer during the company’s transformation from a small agency
+                        to a medium-sized software house serving 50+ international clients</p>
+                </div>
+                <div class="hover-overlay"><span>Know more...</span></div>
+            </div>
+        </div>
+        </br>
+
+        <div class="experience-grid">
+            <div class="card" onclick="openModal('video7')">
+                <img src="cvimg/spilgames_400x250.png" alt="Experience 7">
+                <div class="card-content">
+                    <h3>Software Engineer / Scrum Master</h3>
+                    <h5> Spil Games b.v. | 2011-2014 </h5>
+                    <p>Contributed to the maintenance and development of high-traffic gaming portals with over <b>30M
+                            unique monthly
+                            visitors</b></p>
+                </div>
+                <div class="hover-overlay"><span>Know more...</span></div>
+            </div>
+
+            <div class="card" onclick="openModal('video8')">
+                <img src="cvimg/unitedgames_400x250.png" alt="Experience 8">
+                <div class="card-content">
+                    <h3>Software Engineer</h3>
+                    <h5>United Games B.V. | 2011 </h5>
+                    <p>Working as a developer for United Games B.V. (this was a <b>Bwin</b> company). Using
+                        <b>Symfony and the Facebook API's</b>
+                    </p>
+                </div>
+                <div class="hover-overlay"><span>Know more...</span></div>
+            </div>
+
+            <div class="card" onclick="openModal('video9')">
+                <img src="cvimg/ratus_400x250.png" alt="Experience 9">
+                <div class="card-content">
+                    <h3>Software Engineer</h3>
+                    <h5> Ratus b.v. | 2011 </h5>
+                    <p>Built and customized white-label solutions integrating social and affiliate networking tools.+
+                        Worked on proprietary frameworks using <b>PHP, MySQL</b>, and extensive <b>JavaScript</b>,</p>
+                </div>
+                <div class="hover-overlay"><span>Know more...</span></div>
+            </div>
+        </div>
+
+        </br>
+        <div class="experience-grid">
+            <div class="card" onclick="openModal('video10')">
+                <img src="cvimg/emesa_400x250.png" alt="Experience 10">
+                <div class="card-content">
+                    <h3>Backend Architect & Developer</h3>
+                    <h5> Emesa B.V. | 2010-2011 </h5>
+                    <p>Contributed to the modernization of Emesa's <b>award-winning e-commerce platform</b>,Developed a
+                        new <b>high-performance auction platform</b>
+                </div>
+                <div class="hover-overlay"><span>Know more...</span></div>
+            </div>
+
+            <div class="card" onclick="openModal('video11')">
+                <img src="cvimg/santander_400x250.png" alt="Experience 11">
+                <div class="card-content">
+                    <h3>Senior Software Developer / Architect</h3>
+                    <h5>Santander Consumer Finance | 2008 - 2010 </h5>
+                    <p>Led maintenance and development of a <b>24/7 high-availability financial software platform</b>,
+                        ensuring performance and reliability across mission-critical systems.
+                    </p>
+                </div>
+                <div class="hover-overlay"><span>Know more...</span></div>
+            </div>
+
+            <div class="card" onclick="openModal('video12')">
+                <img src="cvimg/braam_400x250.png" alt="Experience 12">
+                <div class="card-content">
+                    <h3>Senior Consultant & Development Manager</h3>
+                    <h5> Braam Informatica B.V. | 2007-2008 </h5>
+                    <p>Led software development and IT consulting initiatives across multiple business areas, including
+                        network infrastructure, outsourcing, and enterprise support.</p>
+                </div>
+                <div class="hover-overlay"><span>Know more...</span></div>
+            </div>
+        </div>
+        </br>
+        <div class="experience-grid">
+            <div class="card" onclick="openModal('video13')">
+                <img src="cvimg/usmedia_400x250.png" alt="Experience 13">
+                <div class="card-content">
+                    <h3>Senior Developer</h3>
+                    <h5> USMedia B.V.| 2007 </h5>
+                    <p>Contributed to high-profile web and digital solutions for clients such as <b>Shell, ABN AMRO,
+                            Tommy Hilfiger, Unilever, Canon, and EA Games.</b>
+                    </p>
+                </div>
+                <div class="hover-overlay"><span>Know more...</span></div>
+            </div>
+
+            <div class="card" onclick="openModal('video14')">
+                <img src="cvimg/freelance-web-designer-developer.png" alt="Experience 14">
+                <div class="card-content">
+                    <h3>Freelance Web Developer</h3>
+                    <h5> Self-Employed | 2006-2007 </h5>
+                    <p>Provided IT consulting and technical support for small businesses, including troubleshooting,
+                        infrastructure setup, and user training.</p>
+                </div>
+                <div class="hover-overlay"><span>Know more...</span></div>
+            </div>
+            </h2>
+
+            <div class="card" onclick="openModal('video15')">
+                <img src="cvimg/namibe_400x250.png" alt="Experience 15">
+                <div class="card-content">
+                    <h3>IT Consultant & Web Developer</h3>
+                    <h5> Government of Namibe — Namibe, Angola | 2006 </h5>
+                    <p>Collaborated with the local government of Namibe on multiple IT infrastructure and web
+                        development projects.</p>
+                </div>
+                <div class="hover-overlay"><span>Know more...</span></div>
+            </div>
+        </div>
+        </br>
+        <!-- gg -->
+        <div class="experience-grid">
+            <div class="card" onclick="openModal('video16')">
+                <img src="cvimg/gen_400x250.png" alt="Experience 16">
+                <div class="card-content">
+                    <h3>Technological Consultant</h3>
+                    <h5>GEN b.v.| 2005 </h5>
+                    <p>Returned to GEN b.v., a software and consultancy company serving the energy and utilities
+                        sector,
+                        to contribute as a Technological Consultant involved in the full software development
+                        lifecycle.</b>
+                    </p>
+                </div>
+                <div class="hover-overlay"><span>Know more...</span></div>
+            </div>
+
+            <div class="card" onclick="openModal('video17')">
+                <img src="cvimg/freelance2_400x250.jpeg" alt="Experience 17">
+                <div class="card-content">
+                    <h3>Freelance Web Developer</h3>
+                    <h5> GIF Lda.| 2003 </h5>
+                    <p>PHP, MySQL, JavaScript, VB, and Flash, hosted on Apache Web
+                        Server</p>
+                </div>
+                <div class="hover-overlay"><span>Know more...</span></div>
+            </div>
+            </h2>
+
+            <div class="card" onclick="openModal('video18')">
+                <img src="cvimg/jackingprod_400x250.png" alt="Experience 18">
+                <div class="card-content">
+                    <h3>IT Consultant & Web Developer</h3>
+                    <h5> Jackingprod | 2003 </h5>
+                    <p>Designed and developed custom websites, Content Management Systems, and interactive animations
+                        for various clients under Jackingprod.</p>
+                </div>
+                <div class="hover-overlay"><span>Know more...</span></div>
+            </div>
+        </div>
+        </br>
+
+        <div class="experience-grid">
+            <div class="card" onclick="openModal('video19')">
+                <img src="cvimg/braam_400x250.png" alt="Experience 19">
+                <div class="card-content">
+                    <h3>Freelance Developer</h3>
+                    <h5> Braam Informatica B.V.| 2001 - 2002</h5>
+                    <p>
+                        Outsourced to GEN b.v. to support the development and testing of enterprise software systems for
+                        the European energy market, managing operations for water, gas, and electricity networks.
+                    </p>
+                </div>
+                <div class="hover-overlay"><span>Know more...</span></div>
+            </div>
+
+            <div class="card" onclick="openModal('video20')">
+                <img src="cvimg/freelance-web-designer-developer.png" alt="Experience 20">
+                <div class="card-content">
+                    <h3>Manager & Developer</h3>
+                    <h5> Global Intelligence File (GIF Lda.) | 2000 - 2001 </h5>
+                    <p>Co-founded a multimedia and web development studio, delivering custom internet and software
+                        solutions for corporate clients.</p>
+                </div>
+                <div class="hover-overlay"><span>Know more...</span></div>
+            </div>
+
+            <div class="card" onclick="openModal('video21')">
+                <img src="cvimg/ibm_400x250.png" alt="Experience 21">
+                <div class="card-content">
+                    <h3>Software Engineer</h3>
+                    <h5> IBM Global Services | 1999 - 2000 </h5>
+                    <p>Contributed to multiple outsourced software development projects across the banking, industrial,
+                        and IT recovery sectors, primarily using <b>C/C++, SQL, and Lotus Notes</b>.</p>
+                </div>
+                <div class="hover-overlay"><span>Know more...</span></div>
+            </div>
+        </div>
+        </br>
+
+        <!-- ggend -->
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <h2>Core Skills</h2>
+        <br />
+        <div class="skills-list">
+            <span>JavaScript</span>
+            <span>Node.js</span>
+            <span>Agile / Scrum</span>
+            <span>Python</span>
+            <span>NestJS</span>
+            <span>Microservices Architecture</span>
+            <span>Kubernetes</span>
+            <span>Terraform</span>
+            <span>Infrastructure as Code (IaC)</span>
+            <span>Azure Cloud Services</span>
+            <span>AWS secure integration with microservices on Azure</span>
+            <span>System Security & Scalability</span>
+            <span>Monitoring, Logging & Auditing</span>
+            <span>OCPP 2.0 Protocol</span>
+            <span>CI/CD Automation</span>
+            <span>Enterprise Runtime Environments (BMW/CTW) infrastructure</span>
+            <span>AWS Lambda</span>
+            <span>API Gateway</span>
+            <span>SQS</span>
+            <span>CloudFormation</span>
+            <span>Serverless Architecture</span>
+            <span>Asynchronous Communication Patterns</span>
+            <span>Unit & Integration Testing</span>
+            <span>Security Best Practices</span>
+            <span>Logging & Monitoring</span>
+            <span>OCPP 2.0 Protocol</span>
+            <span>Cloud (AWS)</span>
+            <span>Flutter</span>
+            <span>Dart</span>
+            <span>Android</span>
+            <span>Swift</span>
+            <span>Google Cloud</span>
+            <span>Firebase</span>
+            <span>Netlify</span>
+            <span>Leadership</span>
+            <span>Backend Architecture & Development</span>
+            <span>Electric Vehicle Charging Systems</span>
+            <span>Bidirectional Charging (V2G)</span>
+            <span>Battery Management Systems (BMS)</span>
+            <span>Microservices Architecture</span>
+            <span>Kubernetes</span>
+            <span>Terraform</span>
+            <span>Infrastructure as Code (IaC)</span>
+            <span>Azure Cloud Services</span>
+            <span>AWS</span>
+            <span>AWS secure integration with microservices on Azure</span>
+            <span>System Security & Scalability</span>
+            <span>Monitoring, Logging & Auditing</span>
+            <span>OCPP 2.0 Protocol</span>
+            <span>CI/CD Automation</span>
+            <span>OCPP 1.6 Protocol</span>
+            <span>React</span>
+            <span>AngularJS</span>
+            <span>Material Design</span>
+            <span>Digitalocean</span>
+            <span>Distributed runtime environments</span>
+            <span>Worker recovery and orchestration</span>
+            <span>MongoDB</span>
+            <span>WebSocket/WebRTC</span>
+            <span>Low-code Development</span>
+            <span>Real-time Collaboration</span>
+            <span>AI & Machine Learning Integration</span>
+            <span>Fault-tolerant Systems</span>
+            <span>Real-time UX Regeneration</span>
+            <span>A/B Testing & Deployment</span>
+            <span>Business Intelligence Modeling</span>
+            <span>Data Transformation</span>
+            <span>IoT Integration</span>
+            <span>Facial/Mood Recognition</span>
+            <span>Streaming Applications</span>
+            <span>Wordpress</span>
+            <span>Symfony</span>
+            <span>Laravel</span>
+            <span>Agile/Scrum</span>
+            <span>Booking.com Infrastructure</span>
+            <span>Scrum Master</span>
+            <span>Team builder</span>
+            <span>Agile best practices</span>
+            <span>CentOS</span>
+            <span>Nginx</span>
+            <span>PHP</span>
+            <span>MySQL</span>
+            <span>Real-time Chat</span>
+            <span>Live Video Streaming</span>
+            <span>CakePHP</span>
+            <span>RabbitMQ</span>
+            <span>Cassandra</span>
+            <span>Proprietary JS libraries</span>
+            <span>Facebook API's</span>
+            <span>IBM AS/400 Integration</span>
+            <span>Web Services (SOAP, CURL, XML-RPC)</span>
+            <span>.NET to PHP Migration</span>
+            <span>Database Modeling</span>
+            <span>Remote Procedures</span>
+            <span>Secure Authentication</span>
+            <span>TYPO3</span>
+            <span>C/C++</span>
+            <span>SQL</span>
+            <span>Lotus Notes</span>
+            <span>Microsoft Visio</span>
+            <span>OS/2</span>
+            <span>Windows NT</span>
+            <span>IBM VisualAge</span>
+            <span>IBM S/390</span>
+            <span>Crystal Reports</span>
+            <span>InterBase</span>
+            <span>Oracle</span>
+            <span>EDINE Protocol</span>
+            <span>AMFPHP</span>
+            <span>Propel</span>
+            <span>PEAR</span>
+            <span>Smarty</span>
+            <span>Maven</span>
+            <span>AJAX</span>
+            <span>CSS</span>
+            <span>XML/XSLT</span>
+            <span>HTML</span>
+            <span>VB</span>
+            <span>Flash</span>
+            <span>Apache WebServer</span>
+            <span>Laravel</span>
+            <span>Booking.com Infrastructure</span>
+        </div>
+    </section>
+    <!-- Example content -->
+    <!-- Modals for Experience Videos -->
+    <div class="modal" id="video1">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('video1')">&times;</span>
+            <div class="video-container">
+                <video controls>
+                    <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+
+            <div class="text-container">
+                <section>
+                    <h2>2025</h2>
+                    <h3>Independent Developer</h3>
+                    <p>
+                        Mobile App Developer (<b>Flutter</b> / <b>Dart</b>)
+                        Designing and developing cross-platform mobile applications using <b>Flutter</b> and
+                        <b>Dart</b>, targeting both <b>iOS</b> and <b>Android</b>.
+                        Leading development of Fit Trail, a social fitness app enabling users to share routes, workouts,
+                        and experiences within a community-driven platform.
+                        Implementing <b>Firebase services</b> for authentication, real-time data synchronization, and
+                        cloud storage, deployed on <b>Google Cloud</b>.
+                        Managing digital marketing campaigns through <b>Facebook Ads</b> and <b>Google Ads</b> to
+                        promote
+                        user acquisition and engagement.
+                    </p>
+                </section>
+                <section id="skills">
+                    <h2>Core Skills</h2>
+                    <div class="skills-list">
+                        <span>Flutter</span>
+                        <span>Dart</span>
+                        <span>Android</span>
+                        <span>Swift</span>
+                        <span>Google Cloud</span>
+                        <span>Firebase</span>
+                        <span>Netlify</span>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="video2">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('video2')">&times;</span>
+            <div class="video-container">
+                <video controls>
+                    <source src="cvimg/floating.mp4" type="video/mp4" />
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+
+            <div class="text-container">
+                <section>
+                    <h2>Smart WallBox Project - Critical TechWorks / BMW Group</h2>
+                    <h3>Backend Architect & Developer | 2022-2025</h3>
+                    <p>
+                        Following the BDL Project, I helped design and implement the <b>Smart
+                            WallBox</b>, a
+                        production-grade electric vehicle charging platform to be integrated into the <b>BMW
+                            MyApp</b>
+                        ecosystem. The system was built from the ground up using a <b>microservices and
+                            Kubernetes
+                            (IaC)</b>
+                        architecture deployed on <b>Microsoft Azure Cloud</b>.
+                        My primary responsibility was to <b>architect and develop backend
+                            services</b> using <b>NestJS</b>, ensuring
+                        seamless integration with BMW/CTW's runtime infrastructure.
+                        Key contributions include:
+                        Designed and implemented scalable <b>backend microservices</b> to compose and serve
+                        real-time
+                        data
+                        between wallbox systems and BMW backend services.
+                        Built a <b>secure, production-grade system</b> with
+                        standards for
+                        <b>scalability, monitoring,
+                            traceability, and auditability.</b>
+                        Contributed to infrastructure automation and CI/CD workflows following
+                        <b>Infrastructure-as-Code
+                            (IaC)</b> principles.
+
+                    </p>
+                </section>
+                <section id="skills">
+                    <h2>Core Skills</h2>
+                    <div class="skills-list">
+                        <span>Backend Architecture & Development</span>
+                        <span>NestJS</span>
+                        <span>Microservices Architecture</span>
+                        <span>Kubernetes</span>
+                        <span>Terraform</span>
+                        <span>Infrastructure as Code (IaC)</span>
+                        <span>Azure Cloud Services</span>
+                        <span>AWS secure integration with microservices on Azure</span>
+                        <span>System Security & Scalability</span>
+                        <span>Monitoring, Logging & Auditing</span>
+                        <span>OCPP 2.0 Protocol</span>
+                        <span>CI/CD Automation</span>
+                        <span>Enterprise Runtime Environments (BMW/CTW) infrastructure</span>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="video3">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('video3')">&times;</span>
+
+            <div class="video-container">
+                <video controls>
+                    <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+
+            <div class="text-container">
+                <section>
+                    <h2>Bidirectional Charging MVP</h2>
+                    <h3>BDL Project - Critical TechWorks / BMW Group | 2020 -2022</h3>
+                    <p>
+                        Contributed to the research and development of a bidirectional charging system using a fleet of
+                        20 BMW i3 vehicles equipped with <b>BMW BDL batteries</b>. Helped architect and build the system
+                        from the
+                        ground up, developing both a web application for test users and an operations cockpit for
+                        support and research.
+                        Designed and implemented a <b>serverless backend</b> using AWS Lambda (Python), API Gateway, and
+                        SQS,
+                        with fault tolerance and graceful degradation.
+                        Created <b>Infrastructure as Code</b> foundations with AWS CloudFormation.
+                        Developed an <b>asynchronous communication pattern</b> linking
+                        HTTP requests to WebSocket responses for
+                        complex error handling.
+                        <b>Achieved 80%+ test coverage</b> through unit and integration testing, despite evolving R&D
+                        requirements.
+                        Refactored and modularized code to ensure scalability and future production readiness.
+                        Implemented <b>advanced security and logging</b>, including AWS Secrets Manager, SES for secure
+                        emails,
+                        and Cognito for pre-authenticated pilot user onboarding.
+                        Played a key role in the <b>successful on-schedule go-live</b>, with zero incidents.
+
+                    </p>
+                </section>
+                <section id="skills">
+                    <h2>Core Skills</h2>
+                    <div class="skills-list">
+                        <span>Python</span>
+                        <span>AWS Lambda</span>
+                        <span>API Gateway</span>
+                        <span>SQS</span>
+                        <span>CloudFormation</span>
+                        <span>Serverless Architecture</span>
+                        <span>Asynchronous Communication Patterns</span>
+                        <span>Unit & Integration Testing</span>
+                        <span>Security Best Practices</span>
+                        <span>Logging & Monitoring</span>
+                        <span>OCPP 2.0 Protocol</span>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="video4">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('video4')">&times;</span>
+
+            <!-- Fixed video container -->
+            <div class="video-container">
+                <video controls>
+                    <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+
+            <!-- Scrollable text section -->
+            <div class="text-container">
+                <section>
+                    <h2>Electric Vehicle Charger</h2>
+                    <h3>EVC Project - Critical TechWorks / BMW Group | 2019 - 2020</h3>
+                    <p>
+                        Joined <b>Critical TechWorks</b>, a joint venture between <b>BMW Group</b> and <b>Critical
+                            Software</b>, as part of
+                        the <b>Electric Vehicle Charger (EVC)</b> project. The EVC system was built using a <b>Node.js
+                            and React</b>
+                        stack deployed on <b>Azure Cloud</b> with a <b>Kubernetes microservices</b> architecture and
+                        <b>Terraform-based
+                            IaC</b>.The project focused on the research and development of a web application for
+                        communication
+                        and control of electric vehicle chargers via the <b>OCPP 1.6 protocol</b>. This initiative
+                        served as an
+                        early-stage solution, later succeeded by next-generation charging projects within the BMW
+                        ecosystem.
+                        Key contributions include: Developed and maintained backend and frontend components in
+                        <b>Node.js</b>
+                        and <b>React.</b>
+                        Contributed to <b>microservices orchestration and cloud infrastructure</b> provisioning with
+                        <b>Kubernetes</b>
+                        and Terraform.
+                        Supported integration of the <b>OCPP 1.6 protocol</b> for real-time EV charger
+                        communication.
+                        Collaborated with cross-functional teams in the BMW ecosystem to ensure system stability and
+                        scalability.
+                    </p>
+                </section>
+                <section id="skills">
+                    <h2>Core Skills</h2>
+                    <div class="skills-list">
+                        <span>Node.js</span>
+                        <span>React</span>
+                        <span>Kubernetes</span>
+                        <span>Terraform</span>
+                        <span>OCPP 1.6 Protocol</span>
+                        <span>Microservices Architecture</span>
+                        <span>Azure Cloud Services</span>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="video5">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('video5')">&times;</span>
+            <div class="video-container">
+                <video controls>
+                    <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+
+            <div class="text-container">
+                <section>
+                    <h2>Advanced Application Modeling</h2>
+                    <h3>Independent R&D | 2015 - 2019</h3>
+                    <p>Developed a full-stack platform-as-a-service and application modeling framework integrating
+                        <b>Node.js, Mongo DB, AngularJs and,React</b>. The system supports <b>flow-based, real-time, and
+                            distributed development</b>,
+                        inspired by <b>Node-RED</b> and extended into a multi-user, <b>WebSocket/WebRTC-driven
+                            environment</b>.
+                        Designed a secure multi-user architecture supporting real-time collaboration and low-latency
+                        communication.
+                        Built a component ecosystem (React, Angular, Material Design) enabling <b>low-code app
+                            generation</b>
+                        for
+                        complex domains (streaming, AI, IoT, facial/mood recognition, and data transformation).
+                        Created a BI modeler for <b>visual knowledge modeling</b> and <b>machine learning</b> — allowing
+                        models
+                        to
+                        self-build, interconnect, and evolve.
+                        Engineered a <b>distributed, fault-tolerant runtime</b>, with automated worker recovery and
+                        unlimited
+                        scalability through multi-core and instance synchronization.
+                        Implemented <b>real-time UX regeneration</b> based on user actions, and tools for live
+                        deployment,
+                        cloning,
+                        and A/B testing of applications.
+                        Deployed several working applications, including projects for <b>Leiden University and PNO
+                            b.v.</b>
+                    </p>
+                </section>
+                <section id="skills">
+                    <h2>Core Skills</h2>
+                    <div class="skills-list">
+                        <span>Node.js</span>
+                        <span>AngularJS</span>
+                        <span>React</span>
+                        <span>Material Design</span>
+                        <span>Digitalocean</span>
+                        <span>Distributed runtime environments</span>
+                        <span>Worker recovery and orchestration</span>
+                        <span>MongoDB</span>
+                        <span>WebSocket/WebRTC</span>
+                        <span>Low-code Development</span>
+                        <span>Real-time Collaboration</span>
+                        <span>AI & Machine Learning Integration</span>
+                        <span>Fault-tolerant Systems</span>
+                        <span>Real-time UX Regeneration</span>
+                        <span>A/B Testing & Deployment</span>
+                        <span>Business Intelligence Modeling</span>
+                        <span>Data Transformation</span>
+                        <span>IoT Integration</span>
+                        <span>Facial/Mood Recognition</span>
+                        <span>Streaming Applications</span>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="video6">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('video6')">&times;</span>
+            <div class="video-container">
+                <video controls>
+                    <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+
+            <div class="text-container">
+                <section>
+                    <h2>Netwerven B.V. / Endouble (acquired by Phenon in 2020)</h2>
+                    <h3>Senior Software Engineer / Consultant | 2014 - 2015</h3>
+                    <p>
+                        Served as both architect and developer during the company's transformation from a small agency
+                        to a medium-sized software house serving 50+ international clients, including <b>Booking.com,
+                            Nike,
+                            G-Star, Cofely GDF SUEZ, and Ahold</b>.
+                        Redesigned development processes and operations, introducing greater control over product
+                        management and reducing technical debt.
+                        Led the transition from Waterfall to structured <b>Agile/Scrum</b> methodologies, ensuring
+                        adherence to
+                        best practices.
+                        Implemented automated testing frameworks (<b>TDD/BDD</b>), code reviews, virtualization
+                        (<b>Vagrant</b>), and
+                        controlled development environments.
+                        Established seamless <b>continuous integration pipelines with Jenkins</b>, including monitoring,
+                        performance tuning, optimization, and deployment automation to production.
+                        Guided the selection of appropriate tools and streamlined product workflows to increase team
+                        efficiency and maintainable code quality.
+
+                    </p>
+                </section>
+                <section id="skills">
+                    <h2>Core Skills</h2>
+                    <div class="skills-list">
+                        <span>Wordpress</span>
+                        <span>Symfony</span>
+                        <span>Laravel</span>
+                        <span>Agile/Scrum</span>
+                        <span>Booking.com Infrastructure</span>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="video7">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('video7')">&times;</span>
+            <div class="video-container">
+                <video controls>
+                    <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+
+            <div class="text-container">
+                <section>
+                    <h2>Spil Games b.v.</h2>
+                    <h3>Software Engineer / Scrum Master | 2011 - 2014</h3>
+                    <p>
+                        Contributed to the development of high-traffic gaming portals with over <b>30M unique monthly
+                            visitors</b>, ensuring scalability, performance, and global availability.
+                        Acted as <b>Scrum Master and team builder</b>, driving <b>Agile best practices</b> and fostering
+                        a
+                        collaborative, user-focused development culture.
+                        Designed and maintained a complex architecture based on <b>CentOS, Nginx, CakePHP, MySQL,
+                            RabbitMQ,
+                            and Cassandra</b>, with extensive use of advanced JavaScript on both client and server sides
+                        (<b>Node.js</b> and <b>proprietary JS libraries</b>).
+                        Collaborated on backend services and APIs written in Python and PHP, supporting core business
+                        domains such as social networking, advertising, and <b>global payment systems</b>.
+                        Led migration and feature development for new <b>Erlang-based </b>backend and
+                        state-of-the-art frontend platforms.
+                        Drove A/B testing initiatives — from idea generation to production validation — to measure
+                        impact and evolve prototypes into full product features, using tools like: <b>Optimizely, New
+                            Relic, Graphite-technologies</b> and some others, to create enhanced website usability and
+                        user experience in collaboration with design and product teams.
+                        Improved code quality and maintainability through unit testing, automated testing, and code
+                        reviews.
+
+                    </p>
+                </section>
+                <section id="skills">
+                    <h2>Core Skills</h2>
+                    <div class="skills-list">
+                        <span>Scrum Master</span>
+                        <span>Team builder</span>
+                        <span>Agile best practices</span>
+                        <span>CentOS</span>
+                        <span>Nginx</span>
+                        <span>CakePHP</span>
+                        <span>MySQL</span>
+                        <span>RabbitMQ</span>
+                        <span>Cassandra</span>
+                        <span>Node.js</span>
+                        <span>Proprietary JS libraries</span>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="video8">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('video8')">&times;</span>
+            <div class="video-container">
+                <video controls>
+                    <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+
+            <div class="text-container">
+                <section>
+                    <h2> United Games B.V. (A Bwin company)</h2>
+                    <h3>Senior Developer | 2011</h3>
+                    <p>
+                        Developed social and multiplayer games using <b>Symfony and Facebook APIs.</b>
+                        Contributed to the Volvo ocean race app and a second edition of “Raise of the Ten,” a game/app
+                        for a major football club,
+                        preparing it for Facebook launch.
+                        Also part of my tasks was monitoring and maintaining the game because there were live bets being
+                        placed on the outcomes of the matches.
+                    </p>
+                </section>
+                <section id="skills">
+                    <h2>Core Skills</h2>
+                    <div class="skills-list">
+                        <span>Symfony</span>
+                        <span>Facebook API's</span>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="video9">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('video9')">&times;</span>
+            <div class="video-container">
+                <video controls>
+                    <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+
+            <div class="text-container">
+                <section>
+                    <h2>Ratus b.v.</h2>
+                    <h3>Software Engineer | 2011</h3>
+                    <p>
+                        Developed subscription-based web platforms focused on adult entertainment market, featuring
+                        <b>real-time chat, messaging, and live
+                            video
+                            streaming</b>.
+                        Built and customized white-label solutions integrating social and affiliate networking tools.+
+                        Worked on proprietary frameworks using <b>PHP, MySQL</b>, and extensive <b>JavaScript</b>,
+                        supported by a
+                        custom template engine similar to <b>Smarty</b>.
+                        Contributed to system scalability, performance, and maintainability through clean architecture
+                        and efficient backend logic.
+                    </p>
+                </section>
+                <section id="skills">
+                    <h2>Core Skills</h2>
+                    <div class="skills-list">
+                        <span>PHP</span>
+                        <span>MySQL</span>
+                        <span>JavaScript</span>
+                        <span>Real-time Chat</span>
+                        <span>Live Video Streaming</span>
+                    </div>
+                </section>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="video10">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('video10')">&times;</span>
+            <div class="video-container">
+                <video controls>
+                    <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+
+            <div class="text-container">
+                <section>
+                    <h2> Emesa B.V.</h2>
+                    <h3>Backend Architect & Developer | 2010 - 2011</h3>
+                    <p>
+                        Contributed to the modernization of Emesa's <b>award-winning e-commerce platform</b>, recognized
+                        with
+                        multiple national awards for innovation and growth.
+                        Led refactoring initiatives to enhance scalability, performance, and maintainability across the
+                        company's IT infrastructure.
+                        Developed a new <b>high-performance auction platform</b> using <b>Zend Framework</b>, replacing
+                        the legacy
+                        system.
+                        Managed the migration of legacy systems and consolidated multiple affiliate and click-tracking
+                        applications into a unified solution, the “ClickLog” server.
+                        Designed and implemented a RESTful architecture integrating multiple modules including user
+                        authentication, data management, reporting, and email services.
+                        Utilized <b>Facebook Scribe</b> for distributed logging, <b>QlikView</b> for analytics and
+                        reporting, and
+                        <b></b>Afast API for financial system integration.
+                        Improved data flow and reporting efficiency across departments through a centralized, automated
+                        data management system.
+                    </p>
+                </section>
+                <section id="skills">
+                    <h2>Core Skills</h2>
+                    <div class="skills-list">
+                        <span>Zend Framework</span>
+                        <span>RESTful Architecture</span>
+                        <span>Facebook Scribe</span>
+                        <span>QlikView</span>
+                        <span>Afast API Integration</span>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="video11">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('video11')">&times;</span>
+            <div class="video-container">
+                <video controls>
+                    <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+
+            <div class="text-container">
+                <section>
+                    <h2> Santander Consumer Finance</h2>
+                    <h3>Senior Software Developer / Architectr | 2008 - 2010</h3>
+                    <p>
+                        Led maintenance and development of a <b>24/7 high-availability financial software platform</b>,
+                        ensuring performance and reliability across mission-critical systems.
+                        Designed and implemented <b>web services (SOAP, CURL, XML-RPC)</b> and integrations with
+                        third-party
+                        APIs.
+                        Engineered middleware solutions to connect PHP-based web systems with legacy <b>IBM AS/400</b>
+                        infrastructure in Madrid.
+                        Directed the migration of <b>.NET</b> applications into a unified <b>PHP</b> ecosystem,
+                        improving system
+                        coherence and maintainability.
+                        Applied advanced <b>database modeling, remote procedures, and secure authentication</b>
+                        mechanisms to
+                        enhance system performance and security.
+                        Championed software quality standards, introducing modern design patterns, documentation
+                        practices, and peer code reviews.
+                        Managed system integrations and change management following Santander's acquisitions across the
+                        Benelux region.
+                        Delivered custom integration solutions for key enterprise clients, including <b>KIA Motors</b>.
+                    </p>
+                </section>
+                <section id="skills">
+                    <h2>Core Skills</h2>
+                    <div class="skills-list">
+                        <span>PHP</span>
+                        <span>IBM AS/400 Integration</span>
+                        <span>Web Services (SOAP, CURL, XML-RPC)</span>
+                        <span>.NET to PHP Migration</span>
+                        <span>Database Modeling</span>
+                        <span>Remote Procedures</span>
+                        <span>Secure Authentication</span>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="video12">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('video12')">&times;</span>
+            <div class="video-container">
+                <video controls>
+                    <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+
+            <div class="text-container">
+                <section>
+                    <h2>Braam Informatica BV</h2>
+                    <h3>Senior Consultant & Development Manager | 2007-2008</h3>
+                    <p>
+                        Led software development and IT consulting initiatives across multiple business areas, including
+                        network infrastructure, outsourcing, and enterprise support.
+                        Designed, developed, an planned resources for diverse client projects, ensuring alignment with
+                        business and technical requirements.
+                        Worked as a <b></b>system integrator on industrial automation projects involving
+                        <b>domotics</b>, <b>burotics</b>,
+                        and <b>robotics</b>, using <b>Nseven</b> technologies.
+                        Specialized in the <b>TYPO3</b> Content Management Framework (CMF), developing advanced
+                        <b>Flash-based
+                            layouts and custom AJAX</b> extensions to enhance user interactivity.
+                    </p>
+                </section>
+                <section id="skills">
+                    <h2>Core Skills</h2>
+                    <div class="skills-list">
+                        <span>TYPO3</span>
+                        <span>Flash-based Layouts</span>
+                        <span>Custom AJAX Extensions</span>
+                        <span>System Integration</span>
+                        <span>Industrial Automation</span>
+                        <span>Domotics</span>
+                        <span>Burotics</span>
+                        <span>Robotics</span>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="video13">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('video14')">&times;</span>
+            <div class="video-container">
+                <video controls>
+                    <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+
+            <div class="text-container">
+                <h2>USMedia B.V.</h2>
+                <h3>Senior Developer | 2007</h3>
+                <p>Contributed to high-profile web and digital solutions for clients such as <b>Shell, ABN AMRO,
+                        Tommy
+                        Hilfiger, Unilever, Canon, and EA Games.</b>
+                    Planned development schedules, implemented backend modules, and ensured code quality and
+                    scalability for complex PHP-based systems.
+                    Worked with a broad range of modern technologies, including <b>PHP5, MySQL, AMFPHP, Propel,
+                        PEAR,
+                        Smarty, Maven, and front-end tools such as JavaScript, AJAX, CSS, XML/XSLT, and HTML.</b>
+                    Delivered high-performance CMS platforms and secure backend infrastructures under tight
+                    deadlines for large-scale campaigns and flash-based interactive sites.
+                    Developed and maintained several campaign-oriented web platforms, including:
+                    <b>Rexona.nl/bus
+                        Omosplatkanon.nl
+                        Canon Professional Network (cpn.canon-europe.com)
+                        Lemz.nl
+                        Shell.nl.</b>
+                    Designed and built a <b>general-purpose CMS for Flash sites, integrating AMFPHP, Propel, and
+                        Smarty
+                        for streamlined content mana.</b>
+                </p>
+                <section id="skills">
+                    <h2>Core Skills</h2>
+                    <div class="skills-list">
+                        <span>PHP5</span>
+                        <span>MySQL</span>
+                        <span>AMFPHP</span>
+                        <span>Propel</span>
+                        <span>PEAR</span>
+                        <span>Smarty</span>
+                        <span>Maven</span>
+                        <span>JavaScript</span>
+                        <span>AJAX</span>
+                        <span>CSS</span>
+                        <span>XML/XSLT</span>
+                        <span>HTML</span>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="video14">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('video14')">&times;</span>
+            <div class="video-container">
+                <video controls>
+                    <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+
+            <div class="text-container">
+                <section>
+                    <h2>Self-Employed</h2>
+                    <h3>Freelance Web Developer | 2006-200</h3>
+                    <p>Provided IT consulting and technical support for small businesses, including troubleshooting,
+                        infrastructure setup, and user training.
+                        Designed and developed custom web solutions using <b></b>Joomla, Flash, and user-friendly CMS
+                        platforms, tailored to meet diverse business needs.
+                        Delivered responsive and visually engaging websites, focusing on ease of use, maintainability,
+                        and client self-management.
+                        Successfully developed and deployed multiple commercial projects, including:
+                        ed-santana.com
+                        e100cial.com/tictac.htm
+                        centrauto.e100cial.com
+                        quintachaodovintem.com
+                        100civel.com
+                        100sivel.com/nv
+                        Gained <b>hands-on experience in client communication, project delivery, and end-to-end web
+                            development, building a strong foundation for future large-scale projects.</b></p>
+                </section>
+                <section id="skills">
+                    <h2>Core Skills</h2>
+                    <div class="skills-list">
+                        <span>Joomla</span>
+                        <span>Flash</span>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="video15">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('video15')">&times;</span>
+            <div class="video-container">
+                <video controls>
+                    <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+
+            <div class="text-container">
+                <section>
+                    <h2>Government of Namibe — Namibe, Angola</h2>
+                    <h3>IT Consultant & Web Developer | 2006</h3>
+                    <p>
+                        Collaborated with the local government of Namibe on multiple IT infrastructure and web
+                        development projects.
+                        Delivered <b>technical training</b> across several areas, improving digital literacy and system
+                        management for local teams.
+                        Installed and configured <b>satellite internet systems</b> and established a local network
+                        infrastructure for a public Cyber Café.
+                        Designed and developed official websites for:
+                        JORIMIDA Lda — jorimida.com
+                        Namibe Sea Port — portodonamibe.com
+                        Government of Namibe — governodonamibe.com
+                        Built solutions using <b>PHP, MySQL, Flash, JavaScript, and Joomla, deployed on Apache Web
+                            Server</b>
+                        environments.
+                    </p>
+                </section>
+                <section id="skills">
+                    <h2>Core Skills</h2>
+                    <div class="skills-list">
+                        <span>PHP</span>
+                        <span>MySQL</span>
+                        <span>Flash</span>
+                        <span>JavaScript</span>
+                        <span>Joomla</span>
+                        <span>Apache WebServer</span>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="video16">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('video16')">&times;</span>
+            <div class="video-container">
+                <video controls>
+                    <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+
+            <div class="text-container">
+                <section>
+                    <h2>GEN b.v.</h2>
+                    <h3>Technological Consultant | 2005</h3>
+                    <p>Returned to GEN b.v., a software and consultancy company serving the energy and utilities sector,
+                        to contribute as a Technological Consultant involved in the full software development lifecycle.
+                        Developed, tested, and implemented modules for the <b>GEN E-Base</b> software suite, a core
+                        product
+                        supporting energy market operations.
+                        Contributed to the design and development of <b>GEN CIS</b> (Communication & Integration Server)
+                        — a
+                        cross-platform solution integrating industry-standard communication protocols used in the
+                        utility sector.
+                        Engineered processes and messaging systems using modern standards and technologies, including
+                        <b>Java, XML, XSD, XSLT, SOAP, Web Services, EDIFACT (EDINE & EDIG@S), and Python</b>.
+                        Deployed solutions using Apache components<b>(Ant, Tomcat)</b> and implemented process logic
+                        modeled in <b>BPML</b> (Business Process Modeling Language) on the <b>BIE</b>BIE open-source
+                        framework.
+                    </p>
+                </section>
+                <section id="skills">
+                    <h2>Core Skills</h2>
+                    <div class="skills-list">
+                        <span>Java</span>
+                        <span>XML</span>
+                        <span>XSD</span>
+                        <span>XSLT</span>
+                        <span>SOAP</span>
+                        <span>Web Services</span>
+                        <span>EDIFACT (EDINE & EDIG@S)</span>
+                        <span>Python</span>
+                        <span>Apache Ant</span>
+                        <span>Apache Tomcat</span>
+                        <span>BPML (Business Process Modeling Language)</span>
+                        <span>BIEBIE Open-Source Framework</span>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="video17">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('video17')">&times;</span>
+            <div class="video-container">
+                <video controls>
+                    <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+
+            <div class="text-container">
+                <section>
+                    <h2>GIF Lda.</h2>
+                    <h3>Freelance Web Developer | 2003 - 2004</h3>
+                    <p>
+                        Developed a range of custom web solutions for corporate and institutional clients using <b>PHP,
+                            MySQL, JavaScript, Flash, and Apache Web Server</b>.
+                        Built a full Content Management System (CMS) for the Instituto Português do Oriente (IPOR) —
+                        ipor.org.mo
+                        — featuring secure sessions, an internal search engine, and integrated music and video
+                        streaming, all developed from scratch (not based on existing frameworks).
+                        Created the TOSCCA corporate website — toscca.com
+                        — a fully interactive <b>Flash-based</b> platform integrated with backend PHP and MySQL
+                        services.
+                        Designed and implemented the Internet/Intranet portal for the Agrarian School of the University
+                        of Coimbra — gif.pt/agro
+                        — including advanced upload/download tools and CMS functionalities.
+                        Partnered with Motion Design Lda. (motiondesign.pt
+                        ) to develop intro animations, menus, and interactive components for the Águas de Gaia corporate
+                        website (aguasdegaia.pt
+                        ) and produced a 3D animated logo for Gaiurb (gaiurb.pt
+                        ).
+                    </p>
+                </section>
+                <section id="skills">
+                    <h2>Core Skills</h2>
+                    <div class="skills-list">
+                        <span>PHP</span>
+                        <span>MySQL</span>
+                        <span>JavaScript</span>
+                        <span>Flash</span>
+                        <span>Apache WebServer</span>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="video18">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('video18')">&times;</span>
+            <div class="video-container">
+                <video controls>
+                    <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+
+            <div class="text-container">
+                <section>
+                    <h2>Jackingprod</h2>
+                    <h3>Freelance Web Developer | 2003</h3>
+                    <p>
+                        Designed and developed custom websites, Content Management Systems, and interactive animations
+                        for various clients under Jackingprod.
+                        Built and deployed solutions using <b>PHP, MySQL, JavaScript, VB, and Flash, hosted on Apache
+                            Web
+                            Server</b> environments.
+                        Delivered multiple client projects, including:
+                        Colbat — colbat.pt
+                        Blindnote — blindnote.pt
+                        YEU International — yeu-international.org
+                        ARCA Algarve / Komboyo Project — arca-algarve.org/komboyo
+                    </p>
+                </section>
+                <section id="skills">
+                    <h2>Core Skills</h2>
+                    <div class="skills-list">
+                        <span>PHP</span>
+                        <span>MySQL</span>
+                        <span>JavaScript</span>
+                        <span>VB</span>
+                        <span>Flash</span>
+                        <span>Apache WebServer</span>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="video19">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('video19')">&times;</span>
+            <div class="video-container">
+                <video controls>
+                    <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+
+            <div class="text-container">
+                <section>
+                    <h2>Braam Informatica B.V.</h2>
+                    <h3>Software Developer & Technical Trainer | 2001 -2002</h3>
+                    <p>
+                        Outsourced to GEN b.v. to support the development and testing of enterprise software systems for
+                        the European energy market, managing operations for water, gas, and electricity networks.
+                        Contributed to the development of modular applications for supplier, producer, and consumer
+                        management, integrating <b>telemetry data, production forecasting, and SAP connectivity.</b>
+                        Worked extensively with <b>C++ (Borland C++ Builder 5.0, Enterprise Edition)</b>, developing
+                        solutions
+                        running on InterBase and <b>Oracle</b> databases — supporting large-scale datasets with over
+                        <b>2 million
+                            counters capturing 5-minute interval readings</b>.
+                        Implemented industry protocols such as <b>EDINE</b> for utility data exchange and system
+                        interoperability. Delivered internal training courses in Macromedia Flash and web design for
+                        Braam Informatica
+                        staff and external clients in The Hague.
+                        Developed a multimedia presentation CD-ROM for U-ZOEKT in Rotterdam, including interactive
+                        design and animation using Flash and multimedia authoring tools.
+                    </p>
+                </section>
+                <section id="skills">
+                    <h2>Core Skills</h2>
+                    <div class="skills-list">
+                        <span>C++ (Borland C++ Builder 5.0, Enterprise Edition)</span>
+                        <span>InterBase</span>
+                        <span>Oracle</span>
+                        <span>EDINE Protocol</span>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="video20">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('video20')">&times;</span>
+            <div class="video-container">
+                <video controls>
+                    <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+
+            <div class="text-container">
+                <section>
+                    <h2>Global Intelligence File (GIF Lda.)</h2>
+                    <h3>Manager & Developer | 2000 - 2001</h3>
+                    <p>
+                        Co-founded a multimedia and web development studio, delivering custom internet and software
+                        solutions for corporate clients.
+                        Designed and developed the official websites for Vale do Garrão, Lda. — riaparkhotel.pt
+                        and vale-do-garrao.com
+                        — promoting luxury resort properties in the Algarve region.
+                        Built a stock management system (software and hardware) for TOSCCA Lda., a treated wood
+                        manufacturing company, developed in Lotus Notes v4.0 and deployed on a local area network (LAN)
+                        environment.
+                    </p>
+                </section>
+                <section id="skills">
+                    <h2>Core Skills</h2>
+                    <div class="skills-list">
+                        <span>PHP</span>
+                        <span>MySQL</span>
+                        <span>JavaScript</span>
+                        <span>Flash</span>
+                        <span>Apache WebServer</span>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="video21">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('video21')">&times;</span>
+            <div class="video-container">
+                <video controls>
+                    <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+
+            <div class="text-container">
+                <section>
+                    <h2>IBM Global Services</h2>
+                    <h3>Software Engineer | 1998 - 1999</h3>
+                    <p>
+                        Contributed to multiple outsourced software development projects across the banking, industrial,
+                        and IT recovery sectors, primarily using <b>C/C++, SQL, and Lotus Notes</b>.
+                        Key Projects:
+                        <b>Barclays Bank - Virtual Banking Platform</b>:
+                        Participated in the migration of virtual banking systems from <b>OS/2</b> to <b>Windows NT</b>
+                        environments.
+                        Developed in <b>C/C++ using IBM VisualAge</b> and the IOCL Class Library, integrating SGML-based
+                        transaction layouts with <b>IBM S/390</b> mainframes in London.
+                        Supported the transition to a fully object-oriented banking infrastructure.
+                        LISNAVE - Operations Management System (SGO):
+                        Developed components for a multi-module enterprise system managing operations, budgeting, HR,
+                        and stock control.
+                        Focused on building the Project Management Application (PMA) using <b>C++, Crystal Reports,
+                        and
+                        Informix SQL Server</b> to generate analytical and operational reports.
+                        <b>IBM Business Recovery Services</b> - Porto:
+                        Created a <b>Lotus Notes</b> application for managing machine depreciation and asset tracking.
+                        Supported <b>MVS mainframe operations</b>, including system backups, data dumps, and robotic
+                        inventory
+                        handling.
+                        INSA Software House - HR Management System:
+                        Conducted systems analysis for information flow and process optimization in a human resources
+                        management platform.
+                        Designed data and process schematics using <b>Microsoft Visio</b>, applying statistical and
+                        operations
+                        research models.
+                    </p>
+                </section>
+                <section id="skills">
+                    <h2>Core Skills</h2>
+                    <div class="skills-list">
+                        <span>C/C++</span>
+                        <span>SQL</span>
+                        <span>Lotus Notes</span>
+                        <span>Microsoft Visio</span>
+                        <span>OS/2</span>
+                        <span>Windows NT</span>
+                        <span>IBM VisualAge</span>
+                        <span>IBM S/390</span>
+                        <span>Crystal Reports</span>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+
+    <footer>
+        <p>© <span id="year">2025</span> © [Bruno de Sousa] | Built with HTML, CSS & JavaScript</p>
+    </footer>
+
+    <script>
+        // Update footer year
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        const video = document.getElementById('bgVideo');
+        const hero = document.getElementById('hero');
+        const loader = document.getElementById('loader');
+        const scrollDown = document.getElementById('scrollDown');
+        const scrollText = document.getElementById('scrollText')
+
+        let started = false;
+
+        function activateVideoBackground() {
+            if (started) return;
+            started = true;
+
+            // hide shimmer
+            loader.classList.add('fade-out');
+            setTimeout(() => loader.style.display = 'none', 800);
+
+            // show video and fade it in
+            video.classList.add('visible');
+
+            // try to play video
+            const playPromise = video.play();
+            if (playPromise && typeof playPromise.then === 'function') {
+                playPromise.catch(() => {
+                    console.warn('Autoplay blocked, waiting for user interaction');
+                    const resume = () => {
+                        video.play().catch(() => { });
+                        window.removeEventListener('click', resume);
+                        window.removeEventListener('scroll', resume);
+                    };
+                    window.addEventListener('click', resume);
+                    window.addEventListener('scroll', resume);
+                });
+            }
+
+            // show scroll arrow
+            setTimeout(() => scrollDown.classList.add('visible'), 1200);
+            setTimeout(() => scrollText.classList.add('visible'), 1200);
+        }
+
+        // Load video
+        window.addEventListener('DOMContentLoaded', () => {
+            video.load();
+        });
+
+        // When video is ready
+        video.addEventListener('canplaythrough', activateVideoBackground, { once: true });
+
+        // Scroll down arrow click
+        scrollDown.addEventListener('click', () => {
+            document.querySelector('#experience').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        // Pause/resume video when tab hidden
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) video.pause();
+            else if (started) video.play().catch(() => { });
+        });
+
+        // Modals
+        function openModal(id) { document.getElementById(id).style.display = 'flex'; }
+        function closeModal(id) {
+            const modal = document.getElementById(id);
+            modal.style.display = 'none';
+            const video = modal.querySelector('video');
+            video.pause(); video.currentTime = 0;
+        }
+
+        // Contact
+        function openContact() { document.getElementById('contactModal').style.display = 'flex'; }
+        function closeContact() { document.getElementById('contactModal').style.display = 'none'; }
+        function submitContact(e) {
+            e.preventDefault();
+            alert(currentLang === 'en' ? 'Thank you! I will get in touch soon.' : 'Obrigado! Entrarei em contacto em breve.');
+            closeContact();
+        }
+
+        // PDF Download
+        function downloadResume() {
+            const link = document.createElement('a');
+            link.href = 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf';
+            link.download = 'Resume-[YourName].pdf';
+            link.click();
+        }
+
+        // Language Switching
+        let currentLang = 'en';
+        const translations = {
+            en: {
+                navExp: 'Experience', navSkills: 'Skills', navContact: 'Contact',
+                heroTitle: 'Creative Software Engineer | Project Manager | Innovator',
+                btnDownload: '📄 Download Resume (PDF)',
+                expTitle: 'Professional Experience',
+                exp1Title: 'Lead Developer - TechCorp',
+                exp1Desc: 'Implemented scalable cloud solutions leading a 6-person team.',
+                exp2Title: 'Project Manager - InnovateX',
+                exp2Desc: 'Delivered enterprise-level web platforms on time and budget.',
+                skillsTitle: 'Core Skills',
+                contactTitle: 'Contact Me',
+                sendBtn: 'Send Message',
+                footerText: '© [Your Name] | Built with HTML, CSS & JavaScript'
+            },
+            pt: {
+                navExp: 'Experiência', navSkills: 'Competências', navContact: 'Contacto',
+                heroTitle: 'Engenheiro de Software Criativo | Gestor de Projetos | Inovador',
+                btnDownload: '📄 Descarregar Currículo (PDF)',
+                expTitle: 'Experiência Profissional',
+                exp1Title: 'Programador Principal - TechCorp',
+                exp1Desc: 'Implementou soluções cloud escaláveis liderando uma equipa de 6 pessoas.',
+                exp2Title: 'Gestor de Projetos - InnovateX',
+                exp2Desc: 'Entregou plataformas web empresariais dentro do prazo e do orçamento.',
+                skillsTitle: 'Competências Principais',
+                contactTitle: 'Contacte-me',
+                sendBtn: 'Enviar Mensagem',
+                footerText: '© [O Seu Nome] | Criado com HTML, CSS e JavaScript'
+            }
+        };
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            const t = translations[lang];
+            document.getElementById('navExp').textContent = t.navExp;
+            document.getElementById('navSkills').textContent = t.navSkills;
+            document.getElementById('navContact').textContent = t.navContact;
+            document.getElementById('heroTitle').textContent = t.heroTitle;
+            document.getElementById('btnDownload').textContent = t.btnDownload;
+            document.getElementById('expTitle').textContent = t.expTitle;
+            document.getElementById('exp1Title').textContent = t.exp1Title;
+            document.getElementById('exp1Desc').textContent = t.exp1Desc;
+            document.getElementById('exp2Title').textContent = t.exp2Title;
+            document.getElementById('exp2Desc').textContent = t.exp2Desc;
+            document.getElementById('skillsTitle').textContent = t.skillsTitle;
+            document.getElementById('contactTitle').textContent = t.contactTitle;
+            document.getElementById('sendBtn').textContent = t.sendBtn;
+            document.getElementById('footerText').textContent = t.footerText;
+        }
+
+
+        // HERE Open modal with selected video
+        function openModal(id) {
+            document.getElementById(id).style.display = 'flex';
+        }
+
+        // Close modal and stop video playback
+        function closeModal(id) {
+            const modal = document.getElementById(id);
+            modal.style.display = 'none';
+            const video = modal.querySelector('video');
+            video.pause();
+            video.currentTime = 0;
+        }
+
+        // Close modal if clicked outside
+        window.onclick = function (event) {
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(modal => {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                    const video = modal.querySelector('video');
+                    video.pause();
+                    video.currentTime = 0;
+                }
+            });
+        }
+
+        function searchText() {
+            const text = document.getElementById('searchInput').value.trim();
+            removeHighlights(); // clear old highlights
+            if (!text) return;
+
+            const regex = new RegExp(`(${text})`, 'gi');
+            const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null, false);
+            let firstMatchElement = null;
+
+            while (walker.nextNode()) {
+                const node = walker.currentNode;
+                if (node.parentNode.tagName === "SCRIPT" || node.parentNode.tagName === "STYLE") continue;
+
+                const parent = node.parentNode;
+                if (regex.test(node.textContent)) {
+                    const span = document.createElement("span");
+                    span.innerHTML = node.textContent.replace(regex, '<span class="highlight">$1</span>');
+                    parent.replaceChild(span, node);
+
+                    if (!firstMatchElement) {
+                        firstMatchElement = span.querySelector('.highlight');
+                    }
+                }
+            }
+
+            // Scroll to first match
+            if (firstMatchElement) {
+                firstMatchElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                firstMatchElement.style.outline = "2px solid orange"; // optional visual cue
+                setTimeout(() => firstMatchElement.style.outline = "none", 5000);
+            }
+        }
+
+        function removeHighlights() {
+            document.querySelectorAll('.highlight').forEach(el => {
+                const parent = el.parentNode;
+                parent.replaceChild(document.createTextNode(el.textContent), el);
+                parent.normalize(); // merge text nodes
+            });
+        }
+    </script>
+
+</body>
+
+</html>
